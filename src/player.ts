@@ -37,7 +37,7 @@ class Player {
 
   draw(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = 'green';
-    ctx.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
+    this.rect.draw(ctx, 'fill');
   }
 }
 

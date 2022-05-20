@@ -37,12 +37,7 @@ class Game {
 
   draw() {
     this.ctx.clearRect(0, 0, this.screen.width, this.screen.height);
-    this.ctx.strokeRect(
-      this.fightBox.x,
-      this.fightBox.y,
-      this.fightBox.width,
-      this.fightBox.height
-    );
+    this.fightBox.draw(this.ctx, 'stroke');
     this.player.draw(this.ctx);
   }
 }

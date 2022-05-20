@@ -49,6 +49,12 @@ export class Rect {
     this._height = height;
   }
 
+  draw(ctx: CanvasRenderingContext2D, drawMethod: 'fill' | 'stroke') {
+    if (drawMethod == 'fill')
+      return ctx.fillRect(this._x, this._y, this._width, this._height);
+    ctx.strokeRect(this._x, this._y, this._width, this._height);
+  }
+
   get x() {
     return this._x;
   }
