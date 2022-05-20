@@ -23,3 +23,27 @@ export interface RectPosition {
   midBottom?: Position;
   midLeft?: Position;
 }
+
+export type Key = { pressed: boolean };
+
+export interface Keys {
+  up: Key;
+  right: Key;
+  down: Key;
+  left: Key;
+  fire: Key;
+}
+
+export interface KeyMap {
+  ArrowUp: keyof Keys;
+  ArrowRight: keyof Keys;
+  ArrowDown: keyof Keys;
+  ArrowLeft: keyof Keys;
+
+  w: keyof Keys;
+  d: keyof Keys;
+  s: keyof Keys;
+  a: keyof Keys;
+
+  Enter: keyof Keys;
+}

@@ -1,9 +1,14 @@
 import RectObject, { Rect } from './rectangle';
+import InputHandler from './inputs';
+import { Keys } from './interfaces';
+import Player from './player';
 
 class Game {
   private ctx: CanvasRenderingContext2D;
   private screen: Rect;
   private fightBox: Rect;
+  private keys: Keys;
+  private player: Player;
 
   constructor(ctx: CanvasRenderingContext2D, width: number, height: number) {
     this.ctx = ctx;
@@ -13,6 +18,9 @@ class Game {
       y: 0,
     };
     this.screen = screenObject.getRect({ topLeft: screenPos });
+    const inputHandler = new InputHandler();
+    this.keys = inputHandler.keys;
+    this.player = new Player(this.keys, this.ctx);
     this.fightBox = this.createFightBox();
     this.ctx.strokeStyle = 'white';
     this.ctx.lineWidth = 12.5;
@@ -23,7 +31,9 @@ class Game {
     return fightBoxObject.getRect({ midTop: this.screen.center });
   }
 
-  update() {}
+  update() {
+    this.player.update();
+  }
 
   draw() {
     this.ctx.clearRect(0, 0, this.screen.width, this.screen.height);
@@ -33,6 +43,7 @@ class Game {
       this.fightBox.width,
       this.fightBox.height
     );
+    this.player.draw();
   }
 }
 

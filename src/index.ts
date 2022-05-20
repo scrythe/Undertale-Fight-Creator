@@ -23,6 +23,7 @@ function gameLoop(current: number) {
   }
   game.draw();
   previous = current;
+  requestAnimationFrame(gameLoop);
 }
 
 requestAnimationFrame(gameLoop);
