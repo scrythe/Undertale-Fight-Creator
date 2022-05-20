@@ -1,21 +1,43 @@
 import { Keys } from './interfaces';
-
+import RectObject, { Rect } from './rectangle';
 class Player {
-  private keys: Keys;
-  private ctx: CanvasRenderingContext2D;
-
-  constructor(keys: Keys, ctx: CanvasRenderingContext2D) {
-    this.keys = keys;
-    this.ctx = ctx;
+  private WIDTH = 16;
+  private HEIGHT = 16;
+  private SPEED = 2;
+  private rect: Rect;
+  constructor(box: Rect) {
+    const playerObject = new RectObject(this.WIDTH, this.HEIGHT);
+    const playerStartPos = box.center;
+    this.rect = playerObject.getRect({ center: playerStartPos });
   }
 
-  update() {
-    console.log(this.keys.up.pressed);
+  inputs(keys: Keys) {
+    // up or down
+    if (keys.up.pressed && keys.down.pressed) {
+      return;
+    } else if (keys.up.pressed) {
+      this.rect.y -= this.SPEED;
+    } else if (keys.down.pressed) {
+      this.rect.y += this.SPEED;
+    }
+
+    // right or left
+    if (keys.right.pressed && keys.left.pressed) {
+      return;
+    } else if (keys.right.pressed) {
+      this.rect.x += this.SPEED;
+    } else if (keys.left.pressed) {
+      this.rect.x -= this.SPEED;
+    }
   }
 
-  draw() {
-    this.ctx.fillStyle = 'green';
-    this.ctx.fillRect(0, 0, 20, 20);
+  update(keys: Keys) {
+    this.inputs(keys);
+  }
+
+  draw(ctx: CanvasRenderingContext2D) {
+    ctx.fillStyle = 'green';
+    ctx.fillRect(this.rect.x, this.rect.y, this.rect.width, this.rect.height);
   }
 }
 

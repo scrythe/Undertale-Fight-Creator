@@ -20,8 +20,8 @@ class Game {
     this.screen = screenObject.getRect({ topLeft: screenPos });
     const inputHandler = new InputHandler();
     this.keys = inputHandler.keys;
-    this.player = new Player(this.keys, this.ctx);
     this.fightBox = this.createFightBox();
+    this.player = new Player(this.fightBox);
     this.ctx.strokeStyle = 'white';
     this.ctx.lineWidth = 12.5;
   }
@@ -32,7 +32,7 @@ class Game {
   }
 
   update() {
-    this.player.update();
+    this.player.update(this.keys);
   }
 
   draw() {
@@ -43,7 +43,7 @@ class Game {
       this.fightBox.width,
       this.fightBox.height
     );
-    this.player.draw();
+    this.player.draw(this.ctx);
   }
 }
 
