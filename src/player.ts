@@ -4,14 +4,32 @@ class Player {
   private WIDTH = 16;
   private HEIGHT = 16;
   private SPEED = 2;
+  private box: Rect;
   private rect: Rect;
   constructor(box: Rect) {
+    this.box = box;
     const playerObject = new RectObject(this.WIDTH, this.HEIGHT);
-    const playerStartPos = box.center;
+    const playerStartPos = this.box.center;
     this.rect = playerObject.getRect({ center: playerStartPos });
   }
 
-  inputs(keys: Keys) {
+  private checkAndPlaceInsideBox() {
+    const lineWidth = 6;
+    // top
+    if (this.box.top + lineWidth > this.rect.top)
+      this.rect.top = this.box.top + lineWidth;
+    // right
+    if (this.box.right - lineWidth < this.rect.right)
+      this.rect.right = this.box.right - lineWidth;
+    // bottom
+    if (this.box.bottom - lineWidth < this.rect.bottom)
+      this.rect.bottom = this.box.bottom - lineWidth;
+    // left
+    if (this.box.left + lineWidth > this.rect.left)
+      this.rect.left = this.box.left + lineWidth;
+  }
+
+  private inputs(keys: Keys) {
     // up or down
     if (keys.up.pressed && keys.down.pressed) {
       return;
@@ -33,6 +51,7 @@ class Player {
 
   update(keys: Keys) {
     this.inputs(keys);
+    this.checkAndPlaceInsideBox();
   }
 
   draw(ctx: CanvasRenderingContext2D) {
