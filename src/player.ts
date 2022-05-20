@@ -1,62 +1,40 @@
 import { Keys } from './interfaces';
-import RectObject, { Rect } from './rectangle';
+import { Rect } from './rectangle';
+import { RedHeart, BlueHeart } from './hearts';
+
 class Player {
-  private WIDTH = 16;
-  private HEIGHT = 16;
   private SPEED = 2;
   private box: Rect;
-  private rect: Rect;
+  private heart: RedHeart;
   constructor(box: Rect) {
     this.box = box;
-    const playerObject = new RectObject(this.WIDTH, this.HEIGHT);
     const playerStartPos = this.box.center;
-    this.rect = playerObject.getRect({ center: playerStartPos });
+    this.heart = new BlueHeart(this.box, playerStartPos, this.SPEED);
   }
 
   private checkAndPlaceInsideBox() {
     const lineWidth = 6;
     // top
-    if (this.box.top + lineWidth > this.rect.top)
-      this.rect.top = this.box.top + lineWidth;
+    if (this.box.top + lineWidth > this.heart.rect.top)
+      this.heart.rect.top = this.box.top + lineWidth;
     // right
-    if (this.box.right - lineWidth < this.rect.right)
-      this.rect.right = this.box.right - lineWidth;
+    if (this.box.right - lineWidth < this.heart.rect.right)
+      this.heart.rect.right = this.box.right - lineWidth;
     // bottom
-    if (this.box.bottom - lineWidth < this.rect.bottom)
-      this.rect.bottom = this.box.bottom - lineWidth;
+    if (this.box.bottom - lineWidth < this.heart.rect.bottom)
+      this.heart.rect.bottom = this.box.bottom - lineWidth;
     // left
-    if (this.box.left + lineWidth > this.rect.left)
-      this.rect.left = this.box.left + lineWidth;
-  }
-
-  private inputs(keys: Keys) {
-    // up or down
-    if (keys.up.pressed && keys.down.pressed) {
-      return;
-    } else if (keys.up.pressed) {
-      this.rect.y -= this.SPEED;
-    } else if (keys.down.pressed) {
-      this.rect.y += this.SPEED;
-    }
-
-    // right or left
-    if (keys.right.pressed && keys.left.pressed) {
-      return;
-    } else if (keys.right.pressed) {
-      this.rect.x += this.SPEED;
-    } else if (keys.left.pressed) {
-      this.rect.x -= this.SPEED;
-    }
+    if (this.box.left + lineWidth > this.heart.rect.left)
+      this.heart.rect.left = this.box.left + lineWidth;
   }
 
   update(keys: Keys) {
-    this.inputs(keys);
+    this.heart.update(keys);
     this.checkAndPlaceInsideBox();
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = 'green';
-    this.rect.draw(ctx, 'fill');
+    this.heart.draw(ctx);
   }
 }
 
