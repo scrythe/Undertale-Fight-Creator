@@ -9,10 +9,10 @@ class Player {
   private lastTimeSwitched: number;
   private switchDelay = 200;
   private createHeartMap: HeartMap;
+
   constructor(box: Rect) {
     this.box = box;
-    const playerStartPos = this.box.center;
-    this.heart = new RedHeart(playerStartPos, this.SPEED);
+    this.heart = new RedHeart(this.box.center, this.SPEED);
     this.lastTimeSwitched = Date.now();
     this.createHeartMap = {
       RedHeart: () =>

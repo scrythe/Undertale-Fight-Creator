@@ -7,10 +7,10 @@ class Heart {
   protected speed: number;
   protected _rect: Rect;
 
-  constructor(playerStartPos: Position, speed: number) {
+  constructor(playerPos: Position, speed: number) {
     this.speed = speed;
     const playerObject = new RectObject(this.WIDTH, this.HEIGHT);
-    this._rect = playerObject.getRect({ center: playerStartPos });
+    this._rect = playerObject.getRect({ center: playerPos });
   }
 
   protected inputs(keys: Keys) {
