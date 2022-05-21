@@ -37,7 +37,7 @@ class Game {
     this.ctx.clearRect(0, 0, this.screen.width, this.screen.height);
     this.fightBox.draw(this.ctx);
     this.player.draw(this.ctx);
-    this.bone.draw(this.ctx);
+    this.bone.draw(this.fightBox.ctxBox);
   }
 }
 

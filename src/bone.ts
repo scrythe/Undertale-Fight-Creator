@@ -1,4 +1,5 @@
 import RectObject, { Rect } from './rectangle';
+import FightBox from './fightBox';
 class Bone {
   private WIDTH = 10;
   private HEIGHT = 50;
