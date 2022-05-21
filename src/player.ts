@@ -1,35 +1,70 @@
-import { Keys } from './interfaces';
+import { Keys, HeartType, HeartMap } from './interfaces';
 import { Rect } from './rectangle';
 import { RedHeart, BlueHeart } from './hearts';
 
 class Player {
   private SPEED = 2;
   private box: Rect;
-  private heart: RedHeart;
+  private heart: RedHeart | BlueHeart;
+  private lastTimeSwitched: number;
+  private switchDelay = 200;
+  private createHeartMap: HeartMap;
   constructor(box: Rect) {
     this.box = box;
     const playerStartPos = this.box.center;
-    this.heart = new BlueHeart(this.box, playerStartPos, this.SPEED);
+    this.heart = new RedHeart(playerStartPos, this.SPEED);
+    this.lastTimeSwitched = Date.now();
+    this.createHeartMap = {
+      RedHeart: () =>
+        (this.heart = new RedHeart(this.heart.rect.center, this.SPEED)),
+      BlueHeart: () =>
+        (this.heart = new BlueHeart(
+          this.box,
+          this.heart.rect.center,
+          this.SPEED
+        )),
+    };
   }
 
   private checkAndPlaceInsideBox() {
-    const lineWidth = 6;
     // top
-    if (this.box.top + lineWidth > this.heart.rect.top)
-      this.heart.rect.top = this.box.top + lineWidth;
+    if (this.box.top > this.heart.rect.top) this.heart.rect.top = this.box.top;
     // right
-    if (this.box.right - lineWidth < this.heart.rect.right)
-      this.heart.rect.right = this.box.right - lineWidth;
+    if (this.box.right < this.heart.rect.right)
+      this.heart.rect.right = this.box.right;
     // bottom
-    if (this.box.bottom - lineWidth < this.heart.rect.bottom)
-      this.heart.rect.bottom = this.box.bottom - lineWidth;
+    if (this.box.bottom < this.heart.rect.bottom)
+      this.heart.rect.bottom = this.box.bottom;
     // left
-    if (this.box.left + lineWidth > this.heart.rect.left)
-      this.heart.rect.left = this.box.left + lineWidth;
+    if (this.box.left > this.heart.rect.left)
+      this.heart.rect.left = this.box.left;
+  }
+
+  private canSwitch() {
+    const currentTime = Date.now();
+    return this.lastTimeSwitched + this.switchDelay <= currentTime;
+  }
+
+  private switchHeart(heartType?: HeartType) {
+    if (!heartType) {
+      heartType = 'RedHeart';
+      if (this.heart instanceof RedHeart) heartType = 'BlueHeart';
+    }
+    if (!this.canSwitch()) return;
+    this.heart = this.createHeartMap[heartType]();
+    this.lastTimeSwitched = Date.now();
+  }
+
+  inputs(keys: Keys) {
+    this.heart.inputs(keys);
+    if (keys.fire.pressed) {
+      this.switchHeart();
+    }
   }
 
   update(keys: Keys) {
-    this.heart.update(keys);
+    this.heart.update();
+    this.inputs(keys);
     this.checkAndPlaceInsideBox();
   }
 

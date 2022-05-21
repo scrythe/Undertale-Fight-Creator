@@ -1,3 +1,6 @@
+import { BlueHeart, RedHeart } from './hearts';
+import { Rect } from './rectangle';
+
 export interface Position {
   x: number;
   y: number;
@@ -47,3 +50,15 @@ export interface KeyMap {
 
   Enter: keyof Keys;
 }
+
+export interface FightBoxType {
+  inner: Rect;
+  outer: Rect;
+}
+
+export interface HeartMap {
+  RedHeart(): RedHeart;
+  BlueHeart(): BlueHeart;
+}
+
+export type HeartType = keyof HeartMap;

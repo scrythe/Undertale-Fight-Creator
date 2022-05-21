@@ -24,9 +24,8 @@ class Heart {
     }
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = 'green';
-    this._rect.draw(ctx, 'fill');
+  protected draw(ctx: CanvasRenderingContext2D) {
+    this._rect.draw(ctx);
   }
 
   get rect() {
@@ -51,8 +50,11 @@ export class RedHeart extends Heart {
     }
   }
 
-  update(keys: Keys) {
-    this.inputs(keys);
+  update() {}
+
+  draw(ctx: CanvasRenderingContext2D) {
+    ctx.fillStyle = 'red';
+    super.draw(ctx);
   }
 }
 
@@ -70,8 +72,7 @@ export class BlueHeart extends Heart {
   }
 
   private isAtGroundOrBelow() {
-    const lineWidth = 6;
-    return this.box.bottom - lineWidth <= this._rect.bottom;
+    return this.box.bottom <= this._rect.bottom;
   }
 
   private matchedJumpLimit() {
@@ -107,8 +108,12 @@ export class BlueHeart extends Heart {
     }
   }
 
-  update(keys: Keys) {
-    this.inputs(keys);
+  update() {
     if (!this.isJumping) this.fallDownwards();
+  }
+
+  draw(ctx: CanvasRenderingContext2D) {
+    ctx.fillStyle = 'blue';
+    super.draw(ctx);
   }
 }
