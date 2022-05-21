@@ -91,7 +91,6 @@ export class BlueHeart extends Heart {
 
   private jump() {
     if (this.isAtGroundOrBelow()) {
-      console.log('test');
       this.isJumping = true;
       this.jumpHeight = 0;
     }

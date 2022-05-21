@@ -14,7 +14,7 @@ class Bone {
 
   draw(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = 'gray';
-    this._rect.draw(ctx);
+    this._rect.draw(ctx, { inBox: true });
   }
 }
 

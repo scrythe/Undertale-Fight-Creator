@@ -26,11 +26,11 @@ class FightBox {
     this.canvasBox.width = this.fightBox.inner.width;
     this.canvasBox.height = this.fightBox.inner.height;
     this._ctxBox = this.canvasBox.getContext('2d')!;
+    this._ctxBox.contextRect = this.fightBox.inner;
   }
 
   drawBoxToScreen(ctx: CanvasRenderingContext2D) {
-    this.ctxBox.drawInBox();
-    ctx.drawImage(this.canvasBox, 0, 0);
+    ctx.drawImage(this.canvasBox, this.fightBox.inner.x, this.fightBox.inner.y);
     this._ctxBox.clearRect(
       0,
       0,

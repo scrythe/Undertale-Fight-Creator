@@ -49,8 +49,12 @@ export class Rect {
     this._height = height;
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
-    ctx.fillRect(this._x, this._y, this._width, this._height);
+  draw(ctx: CanvasRenderingContext2D, options: { inBox?: boolean } = {}) {
+    if (options.inBox) {
+      return ctx.drawInBox(this._x, this._y, this._width, this._height);
+    } else {
+      ctx.fillRect(this._x, this._y, this._width, this._height);
+    }
   }
 
   get x() {
