@@ -29,6 +29,7 @@ class FightBox {
   }
 
   drawBoxToScreen(ctx: CanvasRenderingContext2D) {
+    this.ctxBox.drawInBox();
     ctx.drawImage(this.canvasBox, 0, 0);
     this._ctxBox.clearRect(
       0,

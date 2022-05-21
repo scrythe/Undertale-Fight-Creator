@@ -1,4 +1,5 @@
 import Game from './game';
+import './customCtx';
 
 const WIDTH = 960;
 const HEIGHT = 720;
@@ -8,7 +9,6 @@ const canvas = document.querySelector('canvas')!;
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 const ctx = canvas.getContext('2d')!;
-console.log(ctx);
 
 const game = new Game(ctx, WIDTH, HEIGHT);
 
