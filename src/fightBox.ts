@@ -44,7 +44,6 @@ class FightBox {
     this.fightBox.outer.draw(ctx);
     ctx.fillStyle = 'black';
     this.fightBox.inner.draw(ctx);
-    this.drawBoxToScreen(ctx);
   }
 
   get innerBox() {

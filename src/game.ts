@@ -38,6 +38,7 @@ class Game {
     this.fightBox.draw(this.ctx);
     this.player.draw(this.ctx);
     this.bone.draw(this.fightBox.ctxBox);
+    this.fightBox.drawBoxToScreen(this.ctx);
   }
 }
 
