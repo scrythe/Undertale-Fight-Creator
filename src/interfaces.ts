@@ -6,6 +6,8 @@ export interface Position {
   y: number;
 }
 
+export type Speed = Position;
+
 export interface RectPosition {
   x?: number;
   y?: number;
