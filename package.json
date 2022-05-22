@@ -1,6 +1,6 @@
 {
   "name": "undertale-fight-creator",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "create and display Undertale Fights in the browser",
   "main": "dist/index.js",
   "scripts": {
