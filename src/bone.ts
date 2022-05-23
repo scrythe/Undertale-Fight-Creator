@@ -1,41 +1,61 @@
 import RectObject, { Rect } from './rectangle';
 import { Speed } from './interfaces';
+
+const MAX_SPEED = 2;
+class AttackOption {
+  speed: Speed;
+  end: number;
+  constructor(speed: Speed, end: number) {
+    this.speed = speed;
+    this.end = end;
+  }
+}
+
+const options = [
+  new AttackOption({ x: 0, y: -MAX_SPEED }, 50),
+  new AttackOption({ x: MAX_SPEED, y: 0 }, 100),
+  new AttackOption({ x: 0, y: MAX_SPEED }, 150),
+  new AttackOption({ x: -MAX_SPEED, y: 0 }, 200),
+  new AttackOption({ x: MAX_SPEED, y: 0 }, 250),
+  new AttackOption({ x: -MAX_SPEED, y: 0 }, 400),
+  new AttackOption({ x: MAX_SPEED, y: 0 }, 500),
+];
+
 class Bone {
   private WIDTH = 10;
   private HEIGHT = 50;
-  private MAX_SPEED = 2;
   private _rect: Rect;
   private speed: Speed;
   private frame;
+  private options: AttackOption[];
+  private currentAttack: AttackOption;
 
   constructor(box: Rect) {
     const boneObject = new RectObject(this.WIDTH, this.HEIGHT);
     this._rect = boneObject.getRect({ center: box.center });
     this.speed = { x: 0, y: 0 };
     this.frame = 0;
+    this.options = options;
+    this.currentAttack = this.options[0];
+    this.updateState();
   }
 
-  updateState() {
-    if (this.frame <= 50) {
-      this.speed.x = 0;
-      this.speed.y = -this.MAX_SPEED;
-    } else if (this.frame <= 100) {
-      this.speed.x = this.MAX_SPEED;
-      this.speed.y = 0;
-    } else if (this.frame <= 150) {
-      this.speed.x = 0;
-      this.speed.y = this.MAX_SPEED;
-    } else if (this.frame <= 200) {
-      this.speed.x = -this.MAX_SPEED;
-      this.speed.y = 0;
-    } else {
-      this.speed.x = 0;
-      this.speed.y = 0;
+  updateAttackSequence() {
+    if (this.frame > this.currentAttack.end) {
+      const currentAttackIndex = this.options.indexOf(this.currentAttack);
+      const newAttack = this.options[currentAttackIndex + 1];
+      this.currentAttack = newAttack;
+      this.updateState();
     }
   }
 
+  updateState() {
+    this.speed.x = this.currentAttack.speed.x;
+    this.speed.y = this.currentAttack.speed.y;
+  }
+
   update() {
-    this.updateState();
+    this.updateAttackSequence();
     this._rect.x += this.speed.x;
     this._rect.y += this.speed.y;
     this.frame += 1;
