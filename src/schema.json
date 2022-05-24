@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/Schema",
+  "definitions": {
+    "Schema": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "attacks": {
+          "$ref": "#/definitions/Attacks"
+        }
+      },
+      "required": [
+        "$schema",
+        "attacks"
+      ],
+      "additionalProperties": false
+    },
+    "Attacks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Attack"
+      }
+    },
+    "Attack": {
+      "type": "object",
+      "properties": {
+        "speed": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y"
+          ],
+          "additionalProperties": false
+        },
+        "end": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "speed",
+        "end"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

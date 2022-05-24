@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "webpack-dev-server",
     "build": "webpack",
-    "release": "standard-version"
+    "release": "standard-version",
+    "schema": "node ./src/generate-schema.js"
   },
   "repository": {
     "type": "git",
@@ -33,5 +34,8 @@
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.9.0"
+  },
+  "dependencies": {
+    "ts-json-schema-generator": "^1.0.0"
   }
 }
