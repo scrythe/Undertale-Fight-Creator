@@ -1,7 +1,9 @@
 import RectObject, { Rect } from './rectangle';
 import { Speed } from './interfaces';
+import options from './options.json';
 
-const MAX_SPEED = 2;
+const { attacks } = options;
+
 class AttackOption {
   speed: Speed;
   end: number;
@@ -11,23 +13,13 @@ class AttackOption {
   }
 }
 
-const options = [
-  new AttackOption({ x: 0, y: -MAX_SPEED }, 50),
-  new AttackOption({ x: MAX_SPEED, y: 0 }, 100),
-  new AttackOption({ x: 0, y: MAX_SPEED }, 150),
-  new AttackOption({ x: -MAX_SPEED, y: 0 }, 200),
-  new AttackOption({ x: MAX_SPEED, y: 0 }, 250),
-  new AttackOption({ x: -MAX_SPEED, y: 0 }, 400),
-  new AttackOption({ x: MAX_SPEED, y: 0 }, 500),
-];
-
 class Bone {
   private WIDTH = 10;
   private HEIGHT = 50;
   private _rect: Rect;
   private speed: Speed;
   private frame;
-  private options: AttackOption[];
+  private attacks: AttackOption[];
   private currentAttack: AttackOption;
 
   constructor(box: Rect) {
@@ -35,15 +27,15 @@ class Bone {
     this._rect = boneObject.getRect({ center: box.center });
     this.speed = { x: 0, y: 0 };
     this.frame = 0;
-    this.options = options;
-    this.currentAttack = this.options[0];
+    this.attacks = attacks;
+    this.currentAttack = this.attacks[0];
     this.updateState();
   }
 
   updateAttackSequence() {
     if (this.frame > this.currentAttack.end) {
-      const currentAttackIndex = this.options.indexOf(this.currentAttack);
-      const newAttack = this.options[currentAttackIndex + 1];
+      const currentAttackIndex = this.attacks.indexOf(this.currentAttack);
+      const newAttack = this.attacks[currentAttackIndex + 1];
       this.currentAttack = newAttack;
       this.updateState();
     }
