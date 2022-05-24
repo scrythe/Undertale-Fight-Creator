@@ -1,17 +1,5 @@
 import RectObject, { Rect } from './rectangle';
-import { Speed } from './interfaces';
-import options from './options.json';
-
-const { attacks } = options;
-
-class AttackOption {
-  speed: Speed;
-  end: number;
-  constructor(speed: Speed, end: number) {
-    this.speed = speed;
-    this.end = end;
-  }
-}
+import { Speed, Attack } from './interfaces';
 
 class Bone {
   private WIDTH = 10;
@@ -19,10 +7,10 @@ class Bone {
   private _rect: Rect;
   private speed: Speed;
   private frame;
-  private attacks: AttackOption[];
-  private currentAttack: AttackOption;
+  private attacks: Attack[];
+  private currentAttack: Attack;
 
-  constructor(box: Rect) {
+  constructor(box: Rect, attacks: Attack[]) {
     const boneObject = new RectObject(this.WIDTH, this.HEIGHT);
     this._rect = boneObject.getRect({ center: box.center });
     this.speed = { x: 0, y: 0 };

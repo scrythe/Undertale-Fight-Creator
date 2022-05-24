@@ -70,9 +70,7 @@ export interface Attack {
   end: number;
 }
 
-export type Attacks = Attack[];
-
 export interface Schema {
   $schema: string;
-  attacks: Attacks;
+  attacks: Attack[];
 }

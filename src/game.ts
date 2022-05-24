@@ -1,9 +1,24 @@
 import RectObject, { Rect } from './rectangle';
 import InputHandler from './inputs';
-import { Keys } from './interfaces';
+import { Keys, Attack } from './interfaces';
 import Player from './player';
 import FightBox from './fightBox';
 import Bone from './bone';
+import { ErrorObject } from 'ajv';
+import validateAndGetAttacks from './getAttacks';
+
+let attacks: Attack[] = [
+  {
+    speed: {
+      x: 0,
+      y: -2,
+    },
+    end: 50,
+  },
+];
+let attacksData = validateAndGetAttacks();
+
+if (attacksData) attacks = attacksData;
 
 class Game {
   private ctx: CanvasRenderingContext2D;
@@ -25,7 +40,7 @@ class Game {
     this.keys = inputHandler.keys;
     this.fightBox = new FightBox(this.screen);
     this.player = new Player(this.fightBox.innerBox);
-    this.bone = new Bone(this.fightBox.innerBox);
+    this.bone = new Bone(this.fightBox.innerBox, attacks);
   }
 
   update() {
