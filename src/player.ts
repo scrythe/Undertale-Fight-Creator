@@ -2,13 +2,16 @@ import { Keys, HeartType, HeartMap } from './interfaces';
 import { Rect } from './rectangle';
 import { RedHeart, BlueHeart } from './hearts';
 
+type PlayerHeartMap = HeartMap<RedHeart, BlueHeart>;
+type PlayerHeartType = HeartType<RedHeart, BlueHeart>;
+
 class Player {
   private SPEED = 2;
   private box: Rect;
   private heart: RedHeart | BlueHeart;
   private lastTimeSwitched: number;
   private switchDelay = 200;
-  private createHeartMap: HeartMap;
+  private createHeartMap: PlayerHeartMap;
 
   constructor(box: Rect) {
     this.box = box;
@@ -45,7 +48,7 @@ class Player {
     return this.lastTimeSwitched + this.switchDelay <= currentTime;
   }
 
-  private switchHeart(heartType?: HeartType) {
+  private switchHeart(heartType?: PlayerHeartType) {
     if (!heartType) {
       heartType = 'RedHeart';
       if (this.heart instanceof RedHeart) heartType = 'BlueHeart';

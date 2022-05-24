@@ -3,7 +3,7 @@ const fs = require('fs');
 
 /** @type {import('ts-json-schema-generator/dist/src/Config').Config} */
 const config = {
-  path: 'src/schema.ts',
+  path: 'src/interfaces.ts',
   tsconfig: 'src/tsconfig.json',
   type: 'Schema',
 };

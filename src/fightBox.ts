@@ -2,7 +2,7 @@ import RectObject, { Rect } from './rectangle';
 import { FightBoxType } from './interfaces';
 
 class FightBox {
-  private fightBox: FightBoxType;
+  private fightBox: FightBoxType<Rect>;
   private canvasBox: HTMLCanvasElement;
   private _ctxBox: CanvasRenderingContext2D;
 

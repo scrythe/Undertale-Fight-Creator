@@ -28,20 +28,7 @@
       "type": "object",
       "properties": {
         "speed": {
-          "type": "object",
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            }
-          },
-          "required": [
-            "x",
-            "y"
-          ],
-          "additionalProperties": false
+          "$ref": "#/definitions/Speed"
         },
         "end": {
           "type": "number"
@@ -50,6 +37,25 @@
       "required": [
         "speed",
         "end"
+      ],
+      "additionalProperties": false
+    },
+    "Speed": {
+      "$ref": "#/definitions/Position"
+    },
+    "Position": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
       ],
       "additionalProperties": false
     }

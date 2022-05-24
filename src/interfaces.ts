@@ -1,6 +1,3 @@
-import { BlueHeart, RedHeart } from './hearts';
-import { Rect } from './rectangle';
-
 export interface Position {
   x: number;
   y: number;
@@ -53,14 +50,29 @@ export interface KeyMap {
   Enter: keyof Keys;
 }
 
-export interface FightBoxType {
+export interface FightBoxType<Rect> {
   inner: Rect;
   outer: Rect;
 }
 
-export interface HeartMap {
+export interface HeartMap<RedHeart, BlueHeart> {
   RedHeart(): RedHeart;
   BlueHeart(): BlueHeart;
 }
 
-export type HeartType = keyof HeartMap;
+export type HeartType<RedHeart, BlueHeart> = keyof HeartMap<
+  RedHeart,
+  BlueHeart
+>;
+
+export interface Attack {
+  speed: Speed;
+  end: number;
+}
+
+export type Attacks = Attack[];
+
+export interface Schema {
+  $schema: string;
+  attacks: Attacks;
+}
