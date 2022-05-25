@@ -4,25 +4,12 @@ import { Keys, Attack } from './interfaces';
 import Player from './player';
 import FightBox from './fightBox';
 import Bone from './bone';
-import { ErrorObject } from 'ajv';
-import validateAndGetAttacks from './getAttacks';
-
-let attacks: Attack[] = [
-  {
-    speed: {
-      x: 0,
-      y: -2,
-    },
-    end: 50,
-  },
-];
-let attacksData = validateAndGetAttacks();
-
-if (attacksData) attacks = attacksData;
+import JsonData from './jsonData';
 
 class Game {
   private ctx: CanvasRenderingContext2D;
   private screen: Rect;
+  private jsonData: JsonData;
   private fightBox: FightBox;
   private keys: Keys;
   private player: Player;
@@ -36,11 +23,12 @@ class Game {
       y: 0,
     };
     this.screen = screenObject.getRect({ topLeft: screenPos });
+    this.jsonData = new JsonData();
     const inputHandler = new InputHandler();
     this.keys = inputHandler.keys;
     this.fightBox = new FightBox(this.screen);
     this.player = new Player(this.fightBox.innerBox);
-    this.bone = new Bone(this.fightBox.innerBox, attacks);
+    this.bone = new Bone(this.fightBox.innerBox, this.jsonData.attacks);
   }
 
   update() {
