@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/scrythe/Undertale-Fight-Creattor/compare/v1.0.0...v1.1.0) (2022-05-28)
+
+
+### Features
+
+* add 'wave function' attacl example ([924efd8](https://github.com/scrythe/Undertale-Fight-Creattor/commit/924efd84d97aa02308506fdc1797310aca4243b4))
+* attack pattern can be enterd with json file ([d198e61](https://github.com/scrythe/Undertale-Fight-Creattor/commit/d198e619adfd00a2e1484543fdd7ea37b37a3ce6))
+* automatic json schema creation ([ada315f](https://github.com/scrythe/Undertale-Fight-Creattor/commit/ada315f73226caf721aa6389e591c904d4527555))
+* json validation function with ajv ([edbf402](https://github.com/scrythe/Undertale-Fight-Creattor/commit/edbf40245a29e75d9563391047a066e495a67add))
+* made wave function easier to expand ([5bd3f34](https://github.com/scrythe/Undertale-Fight-Creattor/commit/5bd3f3457f1dce85406380420ebcde3e2dc5f673))
+
+
+### Bug Fixes
+
+* error when attack sequence end plus refactor ([55fcd31](https://github.com/scrythe/Undertale-Fight-Creattor/commit/55fcd317943e49bc7674ce318f1ec83f742fe7e2))
+
 ## 1.0.0 (2022-05-22)
 
 
