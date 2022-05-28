@@ -24,6 +24,9 @@
     "BoneData": {
       "type": "object",
       "properties": {
+        "start": {
+          "type": "number"
+        },
         "position": {
           "$ref": "#/definitions/Position"
         },
@@ -32,11 +35,16 @@
           "items": {
             "$ref": "#/definitions/Attack"
           }
+        },
+        "end": {
+          "type": "number"
         }
       },
       "required": [
+        "start",
         "position",
-        "attacks"
+        "attacks",
+        "end"
       ],
       "additionalProperties": false
     },

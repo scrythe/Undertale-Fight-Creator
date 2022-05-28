@@ -13,6 +13,7 @@ class JsonData {
     bonesData: [
       {
         position: { x: 475, y: 460 },
+        start: 0,
         attacks: [
           {
             speed: {
@@ -22,6 +23,7 @@ class JsonData {
             end: 50,
           },
         ],
+        end: 50,
       },
     ],
   };

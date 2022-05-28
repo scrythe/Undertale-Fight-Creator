@@ -2,6 +2,7 @@
   "$schema": "./schema.json",
   "bonesData": [
     {
+      "start": 0,
       "position": { "x": 500, "y": 460 },
       "attacks": [
         {
@@ -53,9 +54,11 @@
           },
           "end": 500
         }
-      ]
+      ],
+      "end": 520
     },
     {
+      "start": 50,
       "position": { "x": 450, "y": 460 },
       "attacks": [
         {
@@ -107,7 +110,8 @@
           },
           "end": 500
         }
-      ]
+      ],
+      "end": 480
     }
   ]
 }

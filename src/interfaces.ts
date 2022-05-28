@@ -71,8 +71,10 @@ export interface Attack {
 }
 
 export interface BoneData {
+  start: number;
   position: Position;
   attacks: Attack[];
+  end: number;
 }
 
 export interface Schema {

@@ -6,7 +6,7 @@ class Bone {
   private HEIGHT = 50;
   private _rect: Rect;
   private speed: Speed;
-  private frame;
+  private frame: number;
   private attacks: Attack[];
   private currentAttack: Attack;
   private defaultAttack: Attack = {
@@ -16,14 +16,16 @@ class Bone {
     },
     end: 0,
   };
+  private end: number;
 
-  constructor({ position, attacks }: BoneData) {
+  constructor({ position, attacks, end }: BoneData) {
     const boneObject = new RectObject(this.WIDTH, this.HEIGHT);
     this._rect = boneObject.getRect({ topLeft: position });
     this.speed = { x: 0, y: 0 };
     this.frame = 0;
     this.attacks = attacks;
     this.currentAttack = this.attacks[0];
+    this.end = end;
     this.updateState();
   }
 
@@ -60,6 +62,10 @@ class Bone {
   draw(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = 'gray';
     this._rect.draw(ctx, { inBox: true });
+  }
+
+  isBoneFinished() {
+    return this.frame >= this.end;
   }
 }
 
