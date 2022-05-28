@@ -9,7 +9,10 @@
           "type": "string"
         },
         "attacks": {
-          "$ref": "#/definitions/Attacks"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attack"
+          }
         }
       },
       "required": [
@@ -17,12 +20,6 @@
         "attacks"
       ],
       "additionalProperties": false
-    },
-    "Attacks": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Attack"
-      }
     },
     "Attack": {
       "type": "object",

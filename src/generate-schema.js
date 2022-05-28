@@ -1,17 +1,26 @@
-const tsj = require('ts-json-schema-generator');
-const fs = require('fs');
+const { createGenerator } = require('ts-json-schema-generator');
+const { writeFile } = require('fs');
 
-/** @type {import('ts-json-schema-generator/dist/src/Config').Config} */
-const config = {
-  path: 'src/interfaces.ts',
-  tsconfig: 'src/tsconfig.json',
-  type: 'Schema',
-};
+function createSchema() {
+  /** @type {import('ts-json-schema-generator/dist/src/Config').Config} */
+  const config = {
+    path: 'src/interfaces.ts',
+    tsconfig: 'src/tsconfig.json',
+    type: 'Schema',
+  };
 
-const output_path = 'src/schema.json';
+  const schemaGenerator = createGenerator(config);
+  const schema = schemaGenerator.createSchema(config.type);
+  return schema;
+}
 
-const schema = tsj.createGenerator(config).createSchema(config.type);
-const schemaString = JSON.stringify(schema, null, 2);
-fs.writeFile(output_path, schemaString, (err) => {
-  if (err) throw err;
-});
+function writeSchemaFile() {
+  const output_path = 'src/schema.json';
+  const schema = createSchema();
+  const schemaString = JSON.stringify(schema, null, 2);
+  writeFile(output_path, schemaString, (err) => {
+    if (err) throw err;
+  });
+}
+
+writeSchemaFile();

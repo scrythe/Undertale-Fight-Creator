@@ -3,33 +3,33 @@ import schema from './schema.json';
 import { Schema } from './interfaces';
 import options from './options.json';
 
-const defautlSchema: Schema = {
-  $schema: './schema.json',
-  attacks: [
-    {
-      speed: {
-        x: 0,
-        y: -2,
-      },
-      end: 50,
-    },
-  ],
-};
-
 class JsonData {
   private ajv: Ajv;
+  private schema = schema;
   private validate: ValidateFunction<Schema>;
   private data: Schema;
+  private defaultOptions: Schema = {
+    $schema: './schema.json',
+    attacks: [
+      {
+        speed: {
+          x: 0,
+          y: -2,
+        },
+        end: 50,
+      },
+    ],
+  };
 
   constructor() {
     this.ajv = new Ajv();
-    this.validate = this.ajv.compile(schema);
+    this.validate = this.ajv.compile(this.schema);
     this.data = this.validateData(options);
   }
 
-  private validateData(options: Object): Schema {
+  private validateData(options: Schema): Schema {
     const valid = this.validate(options);
-    if (!valid) return defautlSchema;
+    if (!valid) return this.defaultOptions;
     return options;
   }
 
