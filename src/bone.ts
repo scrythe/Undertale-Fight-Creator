@@ -9,6 +9,13 @@ class Bone {
   private frame;
   private attacks: Attack[];
   private currentAttack: Attack;
+  private defaultAttack: Attack = {
+    speed: {
+      x: 0,
+      y: 0,
+    },
+    end: 0,
+  };
 
   constructor(box: Rect, attacks: Attack[]) {
     const boneObject = new RectObject(this.WIDTH, this.HEIGHT);
@@ -20,16 +27,25 @@ class Bone {
     this.updateState();
   }
 
-  updateAttackSequence() {
-    if (this.frame > this.currentAttack.end) {
-      const currentAttackIndex = this.attacks.indexOf(this.currentAttack);
-      const newAttack = this.attacks[currentAttackIndex + 1];
-      this.currentAttack = newAttack;
-      this.updateState();
-    }
+  private updateAttackSequence() {
+    if (this.frame <= this.currentAttack.end) return;
+    const currentAttackIndex = this.attacks.indexOf(this.currentAttack);
+    const newAttackIndex = currentAttackIndex + 1;
+    if (this.isAttackSequenceFinished(newAttackIndex))
+      this.finishAttackSequence();
+    this.currentAttack = this.attacks[newAttackIndex] || this.defaultAttack;
+    this.updateState();
   }
 
-  updateState() {
+  private isAttackSequenceFinished(newAttackIndex: number) {
+    return newAttackIndex >= this.attacks.length;
+  }
+
+  private finishAttackSequence() {
+    this.updateAttackSequence = () => {};
+  }
+
+  private updateState() {
     this.speed.x = this.currentAttack.speed.x;
     this.speed.y = this.currentAttack.speed.y;
   }
