@@ -1,9 +1,9 @@
 import RectObject, { Rect } from './rectangle';
 import InputHandler from './inputs';
-import { Keys, Attack } from './interfaces';
+import { Keys, BoneData } from './interfaces';
 import Player from './player';
 import FightBox from './fightBox';
-import Bone from './bone';
+import BoneWave from './boneWave';
 import JsonData from './jsonData';
 
 class Game {
@@ -13,7 +13,7 @@ class Game {
   private fightBox: FightBox;
   private keys: Keys;
   private player: Player;
-  private bone: Bone;
+  private bonesWave: BoneWave;
 
   constructor(ctx: CanvasRenderingContext2D, width: number, height: number) {
     this.ctx = ctx;
@@ -28,19 +28,19 @@ class Game {
     this.keys = inputHandler.keys;
     this.fightBox = new FightBox(this.screen);
     this.player = new Player(this.fightBox.innerBox);
-    this.bone = new Bone(this.fightBox.innerBox, this.jsonData.attacks);
+    this.bonesWave = new BoneWave(this.jsonData.bonesData);
   }
 
   update() {
     this.player.update(this.keys);
-    this.bone.update();
+    this.bonesWave.update();
   }
 
   draw() {
     this.ctx.clearRect(0, 0, this.screen.width, this.screen.height);
     this.fightBox.draw(this.ctx);
     this.player.draw(this.ctx);
-    this.bone.draw(this.fightBox.ctxBox);
+    this.bonesWave.draw(this.fightBox.ctxBox);
     this.fightBox.drawBoxToScreen(this.ctx);
   }
 }

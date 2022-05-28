@@ -1,22 +1,27 @@
 import Ajv, { ValidateFunction } from 'ajv';
 import schema from './schema.json';
 import { Schema } from './interfaces';
-import options from './options.json';
+import attackData from './attackData.json';
 
 class JsonData {
   private ajv: Ajv;
   private schema = schema;
   private validate: ValidateFunction<Schema>;
   private data: Schema;
-  private defaultOptions: Schema = {
+  private defaultAttackData: Schema = {
     $schema: './schema.json',
-    attacks: [
+    bonesData: [
       {
-        speed: {
-          x: 0,
-          y: -2,
-        },
-        end: 50,
+        position: { x: 475, y: 460 },
+        attacks: [
+          {
+            speed: {
+              x: 0,
+              y: -2,
+            },
+            end: 50,
+          },
+        ],
       },
     ],
   };
@@ -24,17 +29,17 @@ class JsonData {
   constructor() {
     this.ajv = new Ajv();
     this.validate = this.ajv.compile(this.schema);
-    this.data = this.validateData(options);
+    this.data = this.validateData(attackData);
   }
 
-  private validateData(options: Schema): Schema {
-    const valid = this.validate(options);
-    if (!valid) return this.defaultOptions;
-    return options;
+  private validateData(attackData: Schema): Schema {
+    const valid = this.validate(attackData);
+    if (!valid) return this.defaultAttackData;
+    return attackData;
   }
 
-  get attacks() {
-    return this.data.attacks;
+  get bonesData() {
+    return this.data.bonesData;
   }
 }
 

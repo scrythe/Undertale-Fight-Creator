@@ -70,7 +70,12 @@ export interface Attack {
   end: number;
 }
 
+export interface BoneData {
+  position: Position;
+  attacks: Attack[];
+}
+
 export interface Schema {
   $schema: string;
-  attacks: Attack[];
+  bonesData: BoneData[];
 }

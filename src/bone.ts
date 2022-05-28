@@ -1,5 +1,5 @@
 import RectObject, { Rect } from './rectangle';
-import { Speed, Attack } from './interfaces';
+import { Speed, Attack, BoneData } from './interfaces';
 
 class Bone {
   private WIDTH = 10;
@@ -17,9 +17,9 @@ class Bone {
     end: 0,
   };
 
-  constructor(box: Rect, attacks: Attack[]) {
+  constructor({ position, attacks }: BoneData) {
     const boneObject = new RectObject(this.WIDTH, this.HEIGHT);
-    this._rect = boneObject.getRect({ center: box.center });
+    this._rect = boneObject.getRect({ topLeft: position });
     this.speed = { x: 0, y: 0 };
     this.frame = 0;
     this.attacks = attacks;
