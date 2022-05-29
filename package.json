@@ -4,8 +4,9 @@
   "description": "create and display Undertale Fights in the browser",
   "main": "dist/index.js",
   "scripts": {
-    "serve": "webpack-dev-server",
-    "build": "webpack",
+    "serve-client": "webpack-dev-server",
+    "serve-server": "nodemon ./src/server/index.ts",
+    "build": "webpack && tsc -p ./src/server/tsconfig.json",
     "release": "standard-version",
     "schema": "node ./src/generate-schema.js"
   },
@@ -28,8 +29,10 @@
   "homepage": "https://github.com/scrythe/Undertale-Fight-Creattor#readme",
   "devDependencies": {
     "html-webpack-plugin": "^5.5.0",
+    "nodemon": "^2.0.16",
     "standard-version": "^9.5.0",
     "ts-loader": "^9.3.0",
+    "ts-node": "^10.8.0",
     "typescript": "^4.6.4",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2",

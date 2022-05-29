@@ -1,8 +1,5 @@
 import Game from './game';
 import './customCtx';
-import { test } from 'shared';
-
-let a: test;
 
 const WIDTH = 960;
 const HEIGHT = 720;
