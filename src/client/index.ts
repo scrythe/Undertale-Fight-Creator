@@ -1,5 +1,7 @@
 import Game from './game';
 import './customCtx';
+import { ClientInterface } from 'shared/serverInterface';
+import { io } from 'socket.io-client';
 
 const WIDTH = 960;
 const HEIGHT = 720;
@@ -11,6 +13,8 @@ canvas.height = HEIGHT;
 const ctx = canvas.getContext('2d')!;
 
 const game = new Game(ctx, WIDTH, HEIGHT);
+
+const socket: ClientInterface = io('http://localhost:3000');
 
 let previous = performance.now();
 let lag = 0;
@@ -26,5 +30,9 @@ function gameLoop(current: number) {
   previous = current;
   requestAnimationFrame(gameLoop);
 }
+
+socket.on('connect', () => {
+  console.log('connected to server');
+});
 
 requestAnimationFrame(gameLoop);
