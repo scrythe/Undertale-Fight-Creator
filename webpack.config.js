@@ -2,14 +2,19 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/client/index.ts',
   mode: 'development',
   devtool: 'eval-source-map',
   module: {
     rules: [
       {
         test: /\.ts$/,
-        use: 'ts-loader',
+        use: {
+          loader: 'ts-loader',
+          options: {
+            projectReferences: true,
+          },
+        },
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -20,7 +25,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './src/html/index.html',
+      template: './src/client/html/index.html',
     }),
   ],
   devServer: {
