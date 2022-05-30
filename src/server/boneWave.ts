@@ -1,3 +1,4 @@
+import { BoneState } from 'shared/stateInterface';
 import Bone from './bone';
 import { BoneData } from './interfaces';
 
@@ -50,6 +51,15 @@ class BoneWave {
       bone.update();
     });
     this.frame += 1;
+  }
+
+  getBoneStates(): BoneState[] {
+    const boneStates: BoneState[] = [];
+    this.bones.forEach((bone) => {
+      const boneState = bone.getBoneState();
+      boneStates.push(boneState);
+    });
+    return boneStates;
   }
 }
 

@@ -70,6 +70,10 @@ class Player {
     this.inputs(keys);
     this.checkAndPlaceInsideBox();
   }
+
+  get rect() {
+    return this.heart.rect;
+  }
 }
 
 export default Player;

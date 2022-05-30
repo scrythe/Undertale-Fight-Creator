@@ -18,33 +18,23 @@ function isOfKeyMap(key: string): key is keyof typeof keyMap {
   return key in keyMap;
 }
 
+function sendKey(pressedKey: keyof Keys, value: boolean) {
+  console.log(`${pressedKey} is ${value}`);
+}
+
 class InputHandler {
-  private _keys: Keys;
-
   constructor() {
-    this._keys = {
-      up: { pressed: false },
-      right: { pressed: false },
-      down: { pressed: false },
-      left: { pressed: false },
-      fire: { pressed: false },
-    };
-
     addEventListener('keydown', ({ key }) => {
       if (!isOfKeyMap(key)) return;
       const pressedKey = keyMap[key];
-      this._keys[pressedKey].pressed = true;
+      sendKey(pressedKey, true);
     });
 
     addEventListener('keyup', ({ key }) => {
       if (!isOfKeyMap(key)) return;
       const pressedKey = keyMap[key];
-      this._keys[pressedKey].pressed = false;
+      sendKey(pressedKey, false);
     });
-  }
-
-  get keys() {
-    return this._keys;
   }
 }
 

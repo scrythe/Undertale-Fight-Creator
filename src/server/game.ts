@@ -5,6 +5,7 @@ import Player from './player';
 import FightBox from './fightBox';
 import BoneWave from './boneWave';
 import JsonData from './jsonData';
+import { State } from 'shared/stateInterface';
 
 class Game {
   private screen: Rect;
@@ -32,6 +33,13 @@ class Game {
   update() {
     this.player.update(this.keys);
     this.bonesWave.update();
+  }
+
+  getState(): State {
+    const playerPos = { x: this.player.rect.x, y: this.player.rect.y };
+    const boneStates = this.bonesWave.getBoneStates();
+    const state = { playerPos, boneStates };
+    return state;
   }
 }
 

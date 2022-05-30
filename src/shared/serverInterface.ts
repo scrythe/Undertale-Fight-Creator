@@ -1,7 +1,10 @@
 import { Socket as ClientSocket } from 'socket.io-client';
 import { Server, Socket as ServerSocket } from 'socket.io';
+import { State } from './stateInterface';
 
-export interface ServerToClientEvents {}
+export interface ServerToClientEvents {
+  sendState: (state: State) => void;
+}
 
 export interface ClientToServerEvents {}
 

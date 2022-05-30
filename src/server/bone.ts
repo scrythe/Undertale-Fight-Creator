@@ -1,5 +1,6 @@
 import RectObject, { Rect } from './rectangle';
 import { Speed, Attack, BoneData } from './interfaces';
+import { BoneState } from 'shared/stateInterface';
 
 class Bone {
   private WIDTH = 10;
@@ -61,6 +62,12 @@ class Bone {
 
   isBoneFinished() {
     return this.frame >= this.end;
+  }
+
+  getBoneState(): BoneState {
+    const bonePos = { x: this._rect.x, y: this._rect.y };
+    const state = { bonePos };
+    return state;
   }
 }
 

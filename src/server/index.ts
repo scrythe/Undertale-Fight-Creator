@@ -28,7 +28,8 @@ function gameLoop(current: number) {
   lag += timeDiffrence;
   while (lag >= MS_PER_UPDATE) {
     game.update();
-    console.log('update');
+    const gameState = game.getState();
+    io.emit('sendState', gameState);
     lag -= MS_PER_UPDATE;
   }
   previous = current;
