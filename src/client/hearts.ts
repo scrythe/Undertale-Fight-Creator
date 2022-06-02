@@ -1,4 +1,4 @@
-import { Position } from './interfaces';
+import { Position } from 'shared/interface';
 
 class Heart {
   private WIDTH = 16;

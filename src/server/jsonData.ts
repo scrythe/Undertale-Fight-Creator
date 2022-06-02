@@ -1,6 +1,6 @@
 import Ajv, { ValidateFunction } from 'ajv';
 import schema from './schema.json';
-import { Schema } from './interfaces';
+import { Schema } from 'shared/interface';
 import attackData from './attackData.json';
 
 class JsonData {

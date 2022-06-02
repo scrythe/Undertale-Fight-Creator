@@ -1,5 +1,5 @@
 import RectObject, { Rect } from './rectangle';
-import { Speed, Attack, BoneData } from './interfaces';
+import { Speed, Attack, BoneData } from 'shared/interface';
 import { BoneState } from 'shared/stateInterface';
 
 class Bone {

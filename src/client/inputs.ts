@@ -1,4 +1,4 @@
-import { Keys, KeyMap } from './interfaces';
+import { Keys, KeyMap } from 'shared/interface';
 
 const keyMap: KeyMap = {
   ArrowUp: 'up',

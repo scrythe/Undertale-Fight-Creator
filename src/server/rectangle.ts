@@ -1,4 +1,4 @@
-import { Position, RectPosition } from './interfaces';
+import { Position, RectPosition } from 'shared/interface';
 
 class RectObject {
   private _width: number;

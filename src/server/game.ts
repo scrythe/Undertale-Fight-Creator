@@ -1,6 +1,6 @@
 import RectObject, { Rect } from './rectangle';
 import InputHandler from './inputs';
-import { Keys, BoneData } from './interfaces';
+import { Keys, BoneData } from 'shared/interface';
 import Player from './player';
 import FightBox from './fightBox';
 import BoneWave from './boneWave';

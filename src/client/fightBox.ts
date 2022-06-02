@@ -1,5 +1,5 @@
-import RectObject, { Rect } from './rectangle';
-import { FightBoxType } from './interfaces';
+import RectObject, { Rect } from 'shared/rectangle';
+import { FightBoxType } from 'shared/interface';
 
 class FightBox {
   private fightBox: FightBoxType<Rect>;
@@ -41,9 +41,9 @@ class FightBox {
 
   draw(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = 'white';
-    this.fightBox.outer.draw(ctx);
+    ctx.fillRect(...this.fightBox.outer.getRectProperties());
     ctx.fillStyle = 'black';
-    this.fightBox.inner.draw(ctx);
+    ctx.fillRect(...this.fightBox.inner.getRectProperties());
   }
 
   get innerBox() {

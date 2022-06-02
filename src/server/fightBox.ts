@@ -1,5 +1,5 @@
 import RectObject, { Rect } from './rectangle';
-import { FightBoxType } from './interfaces';
+import { FightBoxType } from 'shared/interface';
 
 class FightBox {
   private fightBox: FightBoxType<Rect>;

@@ -1,4 +1,4 @@
-import { Keys, Position } from './interfaces';
+import { Keys, Position } from 'shared/interface';
 import RectObject, { Rect } from './rectangle';
 
 class Heart {

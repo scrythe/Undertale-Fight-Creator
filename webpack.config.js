@@ -22,6 +22,7 @@ module.exports = {
       },
     ],
   },
+
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -40,6 +41,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js'],
+    alias: {
+      shared: path.resolve(__dirname, 'src/shared/'),
+    },
   },
   output: {
     filename: '[name].[contenthash].js',

@@ -1,6 +1,6 @@
-import { Position, RectPosition } from './interfaces';
+import { Position, RectPosition, RectProperties } from './interface';
 
-class RectObject {
+class RectSurface {
   private _width: number;
   private _height: number;
 
@@ -49,12 +49,23 @@ export class Rect {
     this._height = height;
   }
 
-  draw(ctx: CanvasRenderingContext2D, options: { inBox?: boolean } = {}) {
-    if (options.inBox) {
-      return ctx.drawInBox(this._x, this._y, this._width, this._height);
-    } else {
-      ctx.fillRect(this._x, this._y, this._width, this._height);
-    }
+  getRectProperties(): RectProperties {
+    return [this._x, this._y, this._width, this._height];
+  }
+
+  getInsideBoxRectProperties(rect: Rect): RectProperties {
+    const { x, y } = Rect.getInsideBoxPos(
+      { x: this._x, y: this._y },
+      { x: rect.x, y: rect.y }
+    );
+
+    return [x, y, this._width, this._height];
+  }
+
+  static getInsideBoxPos(posObj: Position, posBox: Position): Position {
+    const x = posObj.x - posBox.x;
+    const y = posObj.y - posBox.y;
+    return { x, y };
   }
 
   get x() {
@@ -204,4 +215,4 @@ export class Rect {
   }
 }
 
-export default RectObject;
+export default RectSurface;
