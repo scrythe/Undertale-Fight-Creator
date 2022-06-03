@@ -2,6 +2,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { ServerInterface } from 'shared/serverInterface';
 import Game from './game';
+import GameCreator from './gameCreator';
 
 const server = createServer();
 
@@ -19,6 +20,7 @@ const FPS = 60;
 const MS_PER_UPDATE = 1000 / FPS;
 
 const game = new Game(WIDTH, HEIGHT);
+const gameCreator = new GameCreator();
 
 let previous = performance.now();
 let lag = 0;
@@ -35,6 +37,8 @@ function gameLoop(current: number) {
   previous = current;
   setImmediate(() => gameLoop(performance.now()));
 }
+
+gameCreator.addBullets();
 
 io.on('connection', (socket) => {
   gameLoop(performance.now());

@@ -1,7 +1,9 @@
 import Ajv, { ValidateFunction } from 'ajv';
 import schema from './schema.json';
-import { Schema } from 'shared/interface';
+import { BoneData, Schema } from 'shared/interface';
 import attackData from './attackData.json';
+import { writeFile } from 'fs';
+import { join } from 'path';
 
 class JsonData {
   private ajv: Ajv;
@@ -38,6 +40,15 @@ class JsonData {
     const valid = this.validate(attackData);
     if (!valid) return this.defaultAttackData;
     return attackData;
+  }
+
+  addNewBone(bone: BoneData) {
+    this.data.bonesData.push(bone);
+    const dataString = JSON.stringify(this.data, null, 2);
+    const dataPath = join(__dirname, 'attackData.json');
+    writeFile(dataPath, dataString, (err) => {
+      if (err) throw err;
+    });
   }
 
   get bonesData() {
