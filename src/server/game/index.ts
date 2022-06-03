@@ -1,10 +1,10 @@
 import RectObject, { Rect } from './rectangle';
 import InputHandler from './inputs';
-import { Keys, BoneData } from 'shared/interface';
+import { Keys } from 'shared/interface';
 import Player from './player';
 import FightBox from './fightBox';
 import BoneWave from './boneWave';
-import JsonData from './jsonData';
+import JsonData from '../gameShared/jsonData';
 import { State } from 'shared/stateInterface';
 
 class Game {
