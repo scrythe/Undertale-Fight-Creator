@@ -44,6 +44,12 @@ class BoneWave {
     this.bones.push(bone);
   }
 
+  restart(bonesData: BoneData[]) {
+    this.bones = [];
+    this.unusedBonesData = bonesData;
+    this.frame = 0;
+  }
+
   update() {
     this.addStartedBones();
     this.removeFinishedBones();

@@ -17,18 +17,15 @@ const io: ServerInterface = new Server(server, options);
 const WIDTH = 960;
 const HEIGHT = 720;
 
-let game: Game;
+const game = new Game(WIDTH, HEIGHT, io);
+game.startGame();
 const gameCreator = new GameCreator();
 
 // gameCreator.addBullets();
 
 io.on('connection', (socket) => {
   socket.on('startGame', () => {
-    if (game) {
-      game.stopGame();
-    }
-    game = new Game(WIDTH, HEIGHT, io);
-    game.startGame();
+    game.restart();
   });
 });
 

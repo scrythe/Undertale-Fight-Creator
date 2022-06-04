@@ -40,7 +40,7 @@ class Game {
     this.keys = inputHandler.keys;
     this.fightBox = new FightBox(this.screen);
     this.player = new Player(this.fightBox.innerBox);
-    this.bonesWave = new BoneWave(this.jsonData.getbonesData());
+    this.bonesWave = new BoneWave(this.jsonData.bonesData);
     this.previous = performance.now();
     this.lag = 0;
     this.io = io;
@@ -54,6 +54,11 @@ class Game {
 
   stopGame() {
     this.gameState = GameState.stopped;
+  }
+
+  restart() {
+    this.jsonData.reloadFile();
+    this.bonesWave.restart(this.jsonData.bonesData);
   }
 
   loopGame() {

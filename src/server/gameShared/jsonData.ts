@@ -1,16 +1,14 @@
 import Ajv, { ValidateFunction } from 'ajv';
 import schema from './schema.json';
 import { BoneData, Schema } from '@shared/interface';
-import attackData from './attackData.json';
-import { writeFile } from 'fs';
+import { writeFile, readFileSync } from 'fs';
 import { join } from 'path';
-import { deepFreeze } from '@shared/functions';
 
 class JsonData {
   private ajv: Ajv;
   private schema = schema;
   private validate: ValidateFunction<Schema>;
-  private data: Readonly<Schema>;
+  private data: Schema;
   private defaultAttackData: Schema = {
     $schema: './schema.json',
     bonesData: [
@@ -34,13 +32,20 @@ class JsonData {
   constructor() {
     this.ajv = new Ajv();
     this.validate = this.ajv.compile(this.schema);
-    this.data = this.validateData(attackData);
+    this.data = this.loadFile();
   }
 
-  private validateData(attackData: Schema) {
-    const valid = this.validate(attackData);
-    if (!valid) return this.defaultAttackData;
-    return deepFreeze({ ...attackData } as const);
+  private loadFile() {
+    const attackDataFile = join(__dirname, 'attackData.json');
+    const jsonString = readFileSync(attackDataFile, 'utf8');
+    const data = JSON.parse(jsonString);
+    const valid = this.validate(data);
+    const attackData = valid ? data : this.defaultAttackData;
+    return attackData;
+  }
+
+  reloadFile() {
+    this.data = this.loadFile();
   }
 
   addNewBone(bone: BoneData) {
@@ -53,8 +58,8 @@ class JsonData {
     });
   }
 
-  getbonesData() {
-    return [...this.data.bonesData];
+  get bonesData() {
+    return structuredClone(this.data.bonesData);
   }
 }
 

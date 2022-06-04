@@ -78,8 +78,8 @@ export interface BoneData {
 }
 
 export interface Schema {
-  $schema: Readonly<string>;
-  bonesData: Readonly<BoneData[]>;
+  $schema: string;
+  bonesData: BoneData[];
 }
 
 // export interface RectProperties {
