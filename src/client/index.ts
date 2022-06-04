@@ -15,6 +15,7 @@ const socket: ClientInterface = io('http://localhost:3000');
 const game = new Game(ctx, WIDTH, HEIGHT);
 
 socket.on('connect', () => {
+  socket.emit('startGame');
   socket.on('sendState', (state) => {
     game.draw(state);
   });

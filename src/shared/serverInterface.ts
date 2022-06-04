@@ -6,7 +6,9 @@ export interface ServerToClientEvents {
   sendState: (state: State) => void;
 }
 
-export interface ClientToServerEvents {}
+export interface ClientToServerEvents {
+  startGame: () => void;
+}
 
 export interface InterServerEvents {}
 

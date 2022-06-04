@@ -9,7 +9,7 @@ class JsonData {
   private ajv: Ajv;
   private schema = schema;
   private validate: ValidateFunction<Schema>;
-  private data: Schema;
+  private data: Readonly<Schema>;
   private defaultAttackData: Schema = {
     $schema: './schema.json',
     bonesData: [
@@ -33,7 +33,7 @@ class JsonData {
   constructor() {
     this.ajv = new Ajv();
     this.validate = this.ajv.compile(this.schema);
-    this.data = this.validateData(attackData);
+    this.data = Object.freeze(this.validateData(attackData));
   }
 
   private validateData(attackData: Schema): Schema {
@@ -51,8 +51,8 @@ class JsonData {
     });
   }
 
-  get bonesData() {
-    return this.data.bonesData;
+  getbonesData() {
+    return [...this.data.bonesData];
   }
 }
 
