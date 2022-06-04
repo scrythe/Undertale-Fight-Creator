@@ -1,9 +1,11 @@
 import Ajv, { ValidateFunction } from 'ajv';
 import schema from './schema.json';
-import { BoneData, Schema } from 'shared/interface';
+import { BoneData, Schema } from '@shared/interface';
 import attackData from './attackData.json';
 import { writeFile } from 'fs';
 import { join } from 'path';
+import { pathTest } from '@shared/functions';
+pathTest();
 
 class JsonData {
   private ajv: Ajv;

@@ -1,6 +1,6 @@
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-import { ServerInterface } from 'shared/serverInterface';
+import { ServerInterface } from '@shared/serverInterface';
 import Game from './game';
 import GameCreator from './gameCreator';
 
@@ -28,7 +28,6 @@ io.on('connection', (socket) => {
       game.stopGame();
     }
     game = new Game(WIDTH, HEIGHT, io);
-    console.log(game.testFrame);
     game.startGame();
   });
 });

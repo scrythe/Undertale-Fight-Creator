@@ -1,12 +1,12 @@
 import RectObject, { Rect } from './rectangle';
 import InputHandler from './inputs';
-import { Keys } from 'shared/interface';
+import { Keys } from '@shared/interface';
 import Player from './player';
 import FightBox from './fightBox';
 import BoneWave from './boneWave';
 import JsonData from '../gameShared/jsonData';
-import { State } from 'shared/stateInterface';
-import { ServerInterface } from 'shared/serverInterface';
+import { State } from '@shared/stateInterface';
+import { ServerInterface } from '@shared/serverInterface';
 import { Server } from 'socket.io';
 
 enum GameState {
@@ -27,7 +27,6 @@ class Game {
   private MS_PER_UPDATE = 1000 / this.FPS;
   private io: Server;
   private gameState: GameState;
-  public testFrame: number;
 
   constructor(width: number, height: number, io: ServerInterface) {
     const screenObject = new RectObject(width, height);
@@ -46,7 +45,6 @@ class Game {
     this.lag = 0;
     this.io = io;
     this.gameState = GameState.stopped;
-    this.testFrame = 0;
   }
 
   startGame() {
@@ -76,10 +74,6 @@ class Game {
   update() {
     this.player.update(this.keys);
     this.bonesWave.update();
-    if (this.testFrame >= 250) {
-      this.stopGame();
-    }
-    this.testFrame += 1;
   }
 
   getState(): State {

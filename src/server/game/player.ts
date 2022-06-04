@@ -1,4 +1,4 @@
-import { Keys, HeartType, HeartMap } from 'shared/interface';
+import { Keys, HeartType, HeartMap } from '@shared/interface';
 import { Rect } from './rectangle';
 import { RedHeart, BlueHeart } from './hearts';
 

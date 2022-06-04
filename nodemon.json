@@ -1,0 +1,5 @@
+{
+  "execMap": {
+    "ts": "ts-node --project ./src/server/tsconfig.json -r tsconfig-paths/register"
+  }
+}
