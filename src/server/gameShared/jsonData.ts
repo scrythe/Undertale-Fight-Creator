@@ -4,8 +4,7 @@ import { BoneData, Schema } from '@shared/interface';
 import attackData from './attackData.json';
 import { writeFile } from 'fs';
 import { join } from 'path';
-import { pathTest } from '@shared/functions';
-pathTest();
+import { deepFreeze } from '@shared/functions';
 
 class JsonData {
   private ajv: Ajv;
@@ -35,17 +34,18 @@ class JsonData {
   constructor() {
     this.ajv = new Ajv();
     this.validate = this.ajv.compile(this.schema);
-    this.data = Object.freeze(this.validateData(attackData));
+    this.data = this.validateData(attackData);
   }
 
-  private validateData(attackData: Schema): Schema {
+  private validateData(attackData: Schema) {
     const valid = this.validate(attackData);
     if (!valid) return this.defaultAttackData;
-    return attackData;
+    return deepFreeze({ ...attackData } as const);
   }
 
   addNewBone(bone: BoneData) {
-    this.data.bonesData.push(bone);
+    const data = JSON.parse(JSON.stringify(this.data));
+    data.bonesData.push(bone);
     const dataString = JSON.stringify(this.data, null, 2);
     const dataPath = join(__dirname, 'attackData.json');
     writeFile(dataPath, dataString, (err) => {
