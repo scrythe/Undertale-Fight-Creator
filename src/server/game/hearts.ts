@@ -34,7 +34,7 @@ export class RedHeart extends Heart {
     super(playerStartPos, speed);
   }
 
-  inputs(keys: Keys) {
+  override inputs(keys: Keys) {
     super.inputs(keys);
     // up or down
     if (keys.up.pressed && keys.down.pressed) {
@@ -74,6 +74,7 @@ export class BlueHeart extends Heart {
     if (this.matchedJumpLimit()) return (this.isJumping = false);
     this.jumpHeight += this.speed;
     this._rect.y -= this.speed;
+    return true;
   }
 
   private fallDownwards() {
@@ -88,7 +89,7 @@ export class BlueHeart extends Heart {
     if (this.isJumping) this.goUpwards();
   }
 
-  inputs(keys: Keys) {
+  override inputs(keys: Keys) {
     super.inputs(keys);
     // up or down
     if (keys.up.pressed) {

@@ -2,7 +2,7 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { ServerInterface } from '@shared/serverInterface';
 import Game from './game';
-import GameCreator from './gameCreator';
+// import GameCreator from './gameCreator';
 
 const server = createServer();
 
@@ -19,7 +19,7 @@ const HEIGHT = 720;
 
 const game = new Game(WIDTH, HEIGHT, io);
 game.startGame();
-const gameCreator = new GameCreator();
+// const gameCreator = new GameCreator();
 
 // gameCreator.addBullets();
 

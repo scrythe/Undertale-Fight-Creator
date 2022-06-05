@@ -25,7 +25,7 @@ class Bone {
     this.speed = { x: 0, y: 0 };
     this.frame = 0;
     this.attacks = attacks;
-    this.currentAttack = this.attacks[0];
+    this.currentAttack = this.attacks[0] || this.defaultAttack;
     this.end = end;
     this.updateState();
   }
