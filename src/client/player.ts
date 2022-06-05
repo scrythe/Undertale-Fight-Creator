@@ -1,5 +1,5 @@
 import { RedHeart, BlueHeart } from './hearts';
-import { Position } from 'shared/interface';
+import { Position } from '@shared/interface';
 
 class Player {
   private heart: RedHeart | BlueHeart;

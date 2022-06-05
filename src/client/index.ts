@@ -1,6 +1,6 @@
 import Game from './game';
 import './customCtx';
-import { ClientInterface } from 'shared/serverInterface';
+import { ClientInterface } from '@shared/serverInterface';
 import { io } from 'socket.io-client';
 
 const WIDTH = 960;

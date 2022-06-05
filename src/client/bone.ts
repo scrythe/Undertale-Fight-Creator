@@ -1,4 +1,4 @@
-import { BoneState } from 'shared/stateInterface';
+import { BoneState } from '@shared/stateInterface';
 
 class Bone {
   private WIDTH = 10;

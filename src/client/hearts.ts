@@ -1,4 +1,4 @@
-import { Position } from 'shared/interface';
+import { Position } from '@shared/interface';
 
 class Heart {
   private WIDTH = 16;
@@ -10,14 +10,14 @@ class Heart {
 }
 
 export class RedHeart extends Heart {
-  draw(ctx: CanvasRenderingContext2D, playerPos: Position) {
+  override draw(ctx: CanvasRenderingContext2D, playerPos: Position) {
     ctx.fillStyle = 'red';
     super.draw(ctx, playerPos);
   }
 }
 
 export class BlueHeart extends Heart {
-  draw(ctx: CanvasRenderingContext2D, playerPos: Position) {
+  override draw(ctx: CanvasRenderingContext2D, playerPos: Position) {
     ctx.fillStyle = 'blue';
     super.draw(ctx, playerPos);
   }
