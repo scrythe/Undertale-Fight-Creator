@@ -1,5 +1,5 @@
-import { Keys, Position } from '@shared/interface';
-import RectObject, { Rect } from './rectangle';
+import { Keys, Position } from '../../shared/interface';
+import RectObject, { Rect } from '../../shared/rectangle';
 
 class Heart {
   private WIDTH = 16;

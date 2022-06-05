@@ -1,6 +1,6 @@
 import Ajv, { ValidateFunction } from 'ajv';
 import schema from './schema.json';
-import { BoneData, Schema } from '@shared/interface';
+import { BoneData, Schema } from '../../shared/interface';
 import { writeFile, readFileSync } from 'fs';
 import { join } from 'path';
 

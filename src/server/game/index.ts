@@ -1,12 +1,12 @@
-import RectObject, { Rect } from './rectangle';
+import RectObject, { Rect } from '../../shared/rectangle';
 import InputHandler from './inputs';
-import { Keys } from '@shared/interface';
+import { Keys } from '../../shared/interface';
 import Player from './player';
 import FightBox from './fightBox';
 import BoneWave from './boneWave';
 import JsonData from '../gameShared/jsonData';
-import { State } from '@shared/stateInterface';
-import { ServerInterface } from '@shared/serverInterface';
+import { State } from '../../shared/stateInterface';
+import { ServerInterface } from '../../shared/serverInterface';
 import { Server } from 'socket.io';
 
 enum GameState {

@@ -1,5 +1,5 @@
 import Bone from './bone';
-import { BoneState } from '@shared/stateInterface';
+import { BoneState } from '../shared/stateInterface';
 
 class BoneWave {
   private bone: Bone;

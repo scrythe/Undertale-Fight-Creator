@@ -6,7 +6,9 @@
   "scripts": {
     "serve-client": "webpack-dev-server",
     "serve-server": "nodemon ./src/server/index.ts",
-    "build": "webpack && tsc -p ./src/server/tsconfig.json",
+    "build-client": "webpack",
+    "build-server": "tsc -p ./src/server/tsconfig.json && tsc-alias -p ./src/server/tsconfig.json",
+    "build": "npm run build-client && npm run build-server",
     "release": "standard-version",
     "schema": "node ./src/generate-schema.js"
   },

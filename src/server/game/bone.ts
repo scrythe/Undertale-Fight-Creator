@@ -1,6 +1,6 @@
-import RectObject, { Rect } from './rectangle';
-import { Speed, Attack, BoneData } from '@shared/interface';
-import { BoneState } from '@shared/stateInterface';
+import RectObject, { Rect } from '../../shared/rectangle';
+import { Speed, Attack, BoneData } from '../../shared/interface';
+import { BoneState } from '../../shared/stateInterface';
 
 class Bone {
   private WIDTH = 10;

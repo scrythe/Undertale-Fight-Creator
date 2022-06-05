@@ -1,4 +1,4 @@
-import { Keys } from '@shared/interface';
+import { Keys } from '../../shared/interface';
 
 class InputHandler {
   private _keys: Keys;

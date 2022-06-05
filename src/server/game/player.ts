@@ -1,5 +1,5 @@
-import { Keys, HeartType, HeartMap } from '@shared/interface';
-import { Rect } from './rectangle';
+import { Keys, HeartType, HeartMap } from '../../shared/interface';
+import { Rect } from '../../shared/rectangle';
 import { RedHeart, BlueHeart } from './hearts';
 
 type PlayerHeartMap = HeartMap<RedHeart, BlueHeart>;
