@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/scrythe/Undertale-Fight-Creattor/compare/v1.1.0...v2.0.0) (2022-06-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* game function done server side
+and draw function done client side
+* change code structure for future server
+
+### Features
+
+* add deep freeze to json data ([28fa934](https://github.com/scrythe/Undertale-Fight-Creattor/commit/28fa934ab1c791384cc01267d844b91e902f8e3b))
+* add multiple diffrent bones ([386dd00](https://github.com/scrythe/Undertale-Fight-Creattor/commit/386dd00fa80234f6f9c8c43a53c669b674246025))
+* add restart game and replace data deepfreeze ([89acab8](https://github.com/scrythe/Undertale-Fight-Creattor/commit/89acab8a39f93773885baa817af6d49970204e58))
+* bone added or removed depending on boneData ([852df51](https://github.com/scrythe/Undertale-Fight-Creattor/commit/852df51332c1136fdd0bfac99f0c6866d215db0e))
+* change code structure for npm package ([a7e8e85](https://github.com/scrythe/Undertale-Fight-Creattor/commit/a7e8e8536eeb0e4e8c25142e13f1e425a7a7cac2))
+* copying important code to server plus setup ([b5757a0](https://github.com/scrythe/Undertale-Fight-Creattor/commit/b5757a0c7dcd5535685d391b567be784a18dbf99))
+* fix path mapping ([e86fd6e](https://github.com/scrythe/Undertale-Fight-Creattor/commit/e86fd6eec053d10d560491bbc85df7b59d228f9f))
+* game operation done on and drawn on client ([ddab484](https://github.com/scrythe/Undertale-Fight-Creattor/commit/ddab4846d7ac17471a028b98b75680c21a7b295a))
+* option to add new bones ([ef68b41](https://github.com/scrythe/Undertale-Fight-Creattor/commit/ef68b41b6a202fb86d9b5871c597203f42f0777e))
+* restart game on refresh ([b59d55a](https://github.com/scrythe/Undertale-Fight-Creattor/commit/b59d55acabce5a3d6e6ebb919c06917634218664))
+
+
+### build
+
+* change code structure for future server ([c22f610](https://github.com/scrythe/Undertale-Fight-Creattor/commit/c22f610c7ba8e7f4fac69dc8bf49ac69f7d4b415))
+
 ## [1.1.0](https://github.com/scrythe/Undertale-Fight-Creattor/compare/v1.0.0...v1.1.0) (2022-05-28)
 
 
