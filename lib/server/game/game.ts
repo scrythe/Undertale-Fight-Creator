@@ -58,6 +58,16 @@ class Game {
     this.gameState = GameState.stopped;
   }
 
+  loadFrame(frame: number) {
+    this.restart();
+    let currentFrame = 0;
+    while (frame >= currentFrame) {
+      this.update();
+      currentFrame += 1;
+    }
+    this.previous = performance.now();
+  }
+
   restart() {
     this.jsonData.reloadFile();
     this.bonesWave.restart(this.jsonData.bonesData);

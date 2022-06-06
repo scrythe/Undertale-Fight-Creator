@@ -19,7 +19,7 @@ game.startGame();
 
 io.on('connection', (socket) => {
   socket.on('startGame', () => {
-    game.restart();
+    game.loadFrame(420);
   });
 });
 
