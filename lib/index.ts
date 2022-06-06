@@ -1,3 +1,2 @@
-export { default as GameServer } from './server/game/game';
-export { default as GameCreator } from './server/gameCreator';
-export { default as GameClient } from './client/game';
+export * as Client from './client';
+export * as Server from './server';

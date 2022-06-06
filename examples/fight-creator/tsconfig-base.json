@@ -6,9 +6,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
 
-    "declaration": true,
     "sourceMap": true,
-    "outDir": "./dist",
 
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -33,6 +31,5 @@
     "allowUnreachableCode": true,
 
     "skipLibCheck": true
-  },
-  "include": ["./lib/**/*"]
+  }
 }

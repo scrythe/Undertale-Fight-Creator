@@ -36,7 +36,12 @@ class JsonData {
   }
 
   private loadFile() {
-    const attackDataFile = join(__dirname, 'attackData.json');
+    const attackDataFile = join(
+      __dirname,
+      '../../../',
+      'attackData',
+      'attackData.json'
+    );
     const jsonString = readFileSync(attackDataFile, 'utf8');
     const data = JSON.parse(jsonString);
     const valid = this.validate(data);
