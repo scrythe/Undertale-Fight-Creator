@@ -27,9 +27,11 @@ class Game {
   private MS_PER_UPDATE = 1000 / this.FPS;
   private io: Server;
   private gameState: GameState;
+  private WIDTH = 960;
+  private HEIGHT = 720;
 
-  constructor(width: number, height: number, io: ServerInterface) {
-    const screenObject = new RectObject(width, height);
+  constructor(io: ServerInterface) {
+    const screenObject = new RectObject(this.WIDTH, this.HEIGHT);
     const screenPos = {
       x: 0,
       y: 0,
