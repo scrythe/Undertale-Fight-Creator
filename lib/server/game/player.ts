@@ -3,8 +3,10 @@ import { Rect } from '../../shared/rectangle';
 import { RedHeart, BlueHeart } from './hearts';
 import { PlayerState } from '../../shared/stateInterface';
 
-type PlayerHeartMap = HeartMap<RedHeart, BlueHeart>;
-type PlayerHeartType = HeartType<RedHeart, BlueHeart>;
+const heartMap: HeartMap<typeof RedHeart, typeof BlueHeart> = {
+  RedHeart,
+  BlueHeart,
+};
 
 class Player {
   private SPEED = 2;
@@ -12,22 +14,11 @@ class Player {
   private heart: RedHeart | BlueHeart;
   private lastTimeSwitched: number;
   private switchDelay = 200;
-  private createHeartMap: PlayerHeartMap;
 
   constructor(box: Rect) {
     this.box = box;
-    this.heart = new RedHeart(this.box.center, this.SPEED);
+    this.heart = new RedHeart(this.box, this.box.center, this.SPEED);
     this.lastTimeSwitched = Date.now();
-    this.createHeartMap = {
-      RedHeart: () =>
-        (this.heart = new RedHeart(this.heart.rect.center, this.SPEED)),
-      BlueHeart: () =>
-        (this.heart = new BlueHeart(
-          this.box,
-          this.heart.rect.center,
-          this.SPEED
-        )),
-    };
   }
 
   private checkAndPlaceInsideBox() {
@@ -49,13 +40,16 @@ class Player {
     return this.lastTimeSwitched + this.switchDelay <= currentTime;
   }
 
-  private switchHeart(heartType?: PlayerHeartType) {
+  private switchHeart(heartType: HeartType): void;
+  private switchHeart(): void;
+  private switchHeart(heartType?: HeartType) {
     if (!heartType) {
       heartType = 'RedHeart';
-      if (this.heart instanceof RedHeart) heartType = 'BlueHeart';
+      if (this.heart.heartType == 'RedHeart') heartType = 'BlueHeart';
     }
     if (!this.canSwitch()) return;
-    this.heart = this.createHeartMap[heartType]();
+    const heart = heartMap[heartType];
+    this.heart = new heart(this.box, this.heart.rect.center, this.SPEED);
     this.lastTimeSwitched = Date.now();
   }
 
@@ -78,7 +72,7 @@ class Player {
   }
 
   getPlayerState(): PlayerState {
-    const heartType = this.heart instanceof RedHeart ? 'RedHeart' : 'BlueHeart';
+    const heartType = this.heart.heartType;
     const playerPos = { x: this.rect.x, y: this.rect.y };
 
     return { heartType, playerPos };

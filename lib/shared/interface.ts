@@ -56,14 +56,11 @@ export interface FightBoxType<Rect> {
 }
 
 export interface HeartMap<RedHeart, BlueHeart> {
-  RedHeart(): RedHeart;
-  BlueHeart(): BlueHeart;
+  RedHeart: RedHeart;
+  BlueHeart: BlueHeart;
 }
 
-export type HeartType<RedHeart, BlueHeart> = keyof HeartMap<
-  RedHeart,
-  BlueHeart
->;
+export type HeartType = keyof HeartMap<'', ''>;
 
 export interface Attack {
   speed: Speed;
@@ -81,12 +78,5 @@ export interface Schema {
   $schema: string;
   bonesData: BoneData[];
 }
-
-// export interface RectProperties {
-//   x: number;
-//   y: number;
-//   width: number;
-//   height: number;
-// }
 
 export type RectProperties = [number, number, number, number];

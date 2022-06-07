@@ -15,7 +15,7 @@ const keyMap: KeyMap = {
   Enter: 'fire',
 };
 
-function isOfKeyMap(key: string): key is keyof typeof keyMap {
+function isOfKeyMap(key: string): key is keyof KeyMap {
   return key in keyMap;
 }
 

@@ -1,7 +1,7 @@
-import { Position } from './interface';
+import { HeartType, Position } from './interface';
 
 export interface PlayerState {
-  heartType: 'RedHeart' | 'BlueHeart';
+  heartType: HeartType;
   playerPos: Position;
 }
 

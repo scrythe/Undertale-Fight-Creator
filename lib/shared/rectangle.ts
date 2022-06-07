@@ -9,6 +9,15 @@ class RectSurface {
     this._height = height;
   }
 
+  getRect(rect: { center: Position }): Rect;
+  getRect(rect: { topLeft: Position }): Rect;
+  getRect(rect: { topRight: Position }): Rect;
+  getRect(rect: { bottomLeft: Position }): Rect;
+  getRect(rect: { bottomRight: Position }): Rect;
+  getRect(rect: { midTop: Position }): Rect;
+  getRect(rect: { midRight: Position }): Rect;
+  getRect(rect: { midBottom: Position }): Rect;
+  getRect(rect: { midLeft: Position }): Rect;
   getRect(rectPos: RectPosition) {
     const rect = new Rect(0, 0, this._width, this._height);
 

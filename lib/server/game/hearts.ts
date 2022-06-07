@@ -1,4 +1,4 @@
-import { Keys, Position } from '../../shared/interface';
+import { Keys, Position, HeartType } from '../../shared/interface';
 import RectObject, { Rect } from '../../shared/rectangle';
 
 class Heart {
@@ -6,11 +6,20 @@ class Heart {
   private HEIGHT = 16;
   protected speed: number;
   protected _rect: Rect;
+  private _heartType: HeartType;
+  protected box: Rect;
 
-  constructor(playerPos: Position, speed: number) {
+  constructor(
+    box: Rect,
+    playerPos: Position,
+    speed: number,
+    heartType: HeartType
+  ) {
+    this.box = box;
     this.speed = speed;
     const playerObject = new RectObject(this.WIDTH, this.HEIGHT);
     this._rect = playerObject.getRect({ center: playerPos });
+    this._heartType = heartType;
   }
 
   protected inputs(keys: Keys) {
@@ -27,11 +36,15 @@ class Heart {
   get rect() {
     return this._rect;
   }
+
+  get heartType() {
+    return this._heartType;
+  }
 }
 
 export class RedHeart extends Heart {
-  constructor(playerStartPos: Position, speed: number) {
-    super(playerStartPos, speed);
+  constructor(box: Rect, playerStartPos: Position, speed: number) {
+    super(box, playerStartPos, speed, 'RedHeart');
   }
 
   override inputs(keys: Keys) {
@@ -50,13 +63,12 @@ export class RedHeart extends Heart {
 }
 
 export class BlueHeart extends Heart {
-  private box: Rect;
   private MAX_JUMP_HEIGHT: number;
   private jumpHeight: number;
   private isJumping: boolean;
+
   constructor(box: Rect, playerStartPos: Position, speed: number) {
-    super(playerStartPos, speed);
-    this.box = box;
+    super(box, playerStartPos, speed, 'BlueHeart');
     this.MAX_JUMP_HEIGHT = box.width / 2;
     this.jumpHeight = 0;
     this.isJumping = false;
