@@ -1,4 +1,5 @@
 import { Keys } from '../../shared/interface';
+import { SocketInterface } from '../../shared/serverInterface';
 
 class InputHandler {
   private _keys: Keys;
@@ -13,28 +14,14 @@ class InputHandler {
     };
   }
 
+  switchSocket(socket: SocketInterface) {
+    socket.on('sendKey', (pressedKey, value) => {
+      this._keys[pressedKey].pressed = value;
+    });
+  }
+
   get keys() {
     return this._keys;
-  }
-
-  set up(value: boolean) {
-    this._keys.up.pressed = value;
-  }
-
-  set right(value: boolean) {
-    this._keys.right.pressed = value;
-  }
-
-  set down(value: boolean) {
-    this._keys.down.pressed = value;
-  }
-
-  set left(value: boolean) {
-    this._keys.left.pressed = value;
-  }
-
-  set fire(value: boolean) {
-    this._keys.fire.pressed = value;
   }
 }
 

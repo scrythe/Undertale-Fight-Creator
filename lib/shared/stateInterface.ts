@@ -1,10 +1,15 @@
 import { Position } from './interface';
 
+export interface PlayerState {
+  heartType: 'RedHeart' | 'BlueHeart';
+  playerPos: Position;
+}
+
 export interface BoneState {
   bonePos: Position;
 }
 
 export interface State {
-  playerPos: Position;
+  playerState: PlayerState;
   boneStates: BoneState[];
 }

@@ -1,4 +1,5 @@
-import { Keys, KeyMap } from '../shared/interface';
+import { KeyMap } from '../shared/interface';
+import { ClientInterface } from '../shared/serverInterface';
 
 const keyMap: KeyMap = {
   ArrowUp: 'up',
@@ -18,22 +19,18 @@ function isOfKeyMap(key: string): key is keyof typeof keyMap {
   return key in keyMap;
 }
 
-function sendKey(pressedKey: keyof Keys, value: boolean) {
-  console.log(`${pressedKey} is ${value}`);
-}
-
 class InputHandler {
-  constructor() {
+  constructor(socket: ClientInterface) {
     addEventListener('keydown', ({ key }) => {
       if (!isOfKeyMap(key)) return;
       const pressedKey = keyMap[key];
-      sendKey(pressedKey, true);
+      socket.emit('sendKey', pressedKey, true);
     });
 
     addEventListener('keyup', ({ key }) => {
       if (!isOfKeyMap(key)) return;
       const pressedKey = keyMap[key];
-      sendKey(pressedKey, false);
+      socket.emit('sendKey', pressedKey, false);
     });
   }
 }

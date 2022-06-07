@@ -1,15 +1,19 @@
 import { RedHeart, BlueHeart } from './hearts';
-import { Position } from '../shared/interface';
+import { PlayerState } from '../shared/stateInterface';
 
 class Player {
-  private heart: RedHeart | BlueHeart;
+  private heartsObject;
 
   constructor() {
-    this.heart = new RedHeart();
+    this.heartsObject = {
+      RedHeart: new RedHeart(),
+      BlueHeart: new BlueHeart(),
+    };
   }
 
-  draw(ctx: CanvasRenderingContext2D, posisiton: Position) {
-    this.heart.draw(ctx, posisiton);
+  draw(ctx: CanvasRenderingContext2D, playerState: PlayerState) {
+    const heart = this.heartsObject[playerState.heartType];
+    heart.draw(ctx, playerState.playerPos);
   }
 }
 

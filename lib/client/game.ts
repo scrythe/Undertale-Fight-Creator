@@ -3,7 +3,9 @@ import Player from './player';
 import FightBox from './fightBox';
 import BoneWave from './boneWave';
 import { State } from '../shared/stateInterface';
+import InputHandler from './inputs';
 import './customCtx';
+import { ClientInterface } from '../shared/serverInterface';
 
 class Game {
   private ctx: CanvasRenderingContext2D;
@@ -14,10 +16,12 @@ class Game {
   private WIDTH = 960;
   private HEIGHT = 720;
 
-  constructor(canvas: HTMLCanvasElement) {
+  constructor(canvas: HTMLCanvasElement, socket: ClientInterface) {
     canvas.width = this.WIDTH;
     canvas.height = this.HEIGHT;
     this.ctx = canvas.getContext('2d')!;
+
+    new InputHandler(socket);
 
     const screenObject = new RectObject(this.WIDTH, this.HEIGHT);
     const screenPos = {
@@ -33,7 +37,7 @@ class Game {
   draw(state: State) {
     this.ctx.clearRect(0, 0, this.screen.width, this.screen.height);
     this.fightBox.draw(this.ctx);
-    this.player.draw(this.ctx, state.playerPos);
+    this.player.draw(this.ctx, state.playerState);
     this.bonesWave.draw(this.fightBox.ctxBox, state.boneStates);
     this.fightBox.drawBoxToScreen(this.ctx);
   }

@@ -4,6 +4,13 @@ import { BoneData, Schema } from '../../shared/interface';
 import { writeFile, readFileSync } from 'fs';
 import { join } from 'path';
 
+const attackDataFilePath = join(
+  __dirname,
+  '../../../',
+  'attackData',
+  'attackData.json'
+);
+
 class JsonData {
   private ajv: Ajv;
   private schema = schema;
@@ -36,13 +43,7 @@ class JsonData {
   }
 
   private loadFile() {
-    const attackDataFile = join(
-      __dirname,
-      '../../../',
-      'attackData',
-      'attackData.json'
-    );
-    const jsonString = readFileSync(attackDataFile, 'utf8');
+    const jsonString = readFileSync(attackDataFilePath, 'utf8');
     const data = JSON.parse(jsonString);
     const valid = this.validate(data);
     const attackData = valid ? data : this.defaultAttackData;
@@ -57,8 +58,7 @@ class JsonData {
     const data = JSON.parse(JSON.stringify(this.data));
     data.bonesData.push(bone);
     const dataString = JSON.stringify(this.data, null, 2);
-    const dataPath = join(__dirname, 'attackData.json');
-    writeFile(dataPath, dataString, (err) => {
+    writeFile(attackDataFilePath, dataString, (err) => {
       if (err) throw err;
     });
   }

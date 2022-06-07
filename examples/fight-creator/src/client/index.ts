@@ -4,7 +4,7 @@ const socket = io('http://localhost:3000');
 
 const canvas = document.querySelector('canvas')!;
 
-const game = new Game(canvas);
+const game = new Game(canvas, socket);
 
 socket.on('connect', () => {
   socket.emit('startGame');

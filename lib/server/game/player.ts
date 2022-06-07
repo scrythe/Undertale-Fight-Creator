@@ -1,6 +1,7 @@
 import { Keys, HeartType, HeartMap } from '../../shared/interface';
 import { Rect } from '../../shared/rectangle';
 import { RedHeart, BlueHeart } from './hearts';
+import { PlayerState } from '../../shared/stateInterface';
 
 type PlayerHeartMap = HeartMap<RedHeart, BlueHeart>;
 type PlayerHeartType = HeartType<RedHeart, BlueHeart>;
@@ -69,6 +70,18 @@ class Player {
     this.heart.update();
     this.inputs(keys);
     this.checkAndPlaceInsideBox();
+  }
+
+  getHeartType() {
+    if (this.heart instanceof RedHeart) return 'RedHeart';
+    return 'BlueHeart';
+  }
+
+  getPlayerState(): PlayerState {
+    const heartType = this.heart instanceof RedHeart ? 'RedHeart' : 'BlueHeart';
+    const playerPos = { x: this.rect.x, y: this.rect.y };
+
+    return { heartType, playerPos };
   }
 
   get rect() {

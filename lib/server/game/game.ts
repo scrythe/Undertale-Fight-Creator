@@ -6,7 +6,7 @@ import FightBox from './fightBox';
 import BoneWave from './boneWave';
 import JsonData from '../gameShared/jsonData';
 import { State } from '../../shared/stateInterface';
-import { ServerInterface } from '../../shared/serverInterface';
+import { ServerInterface, SocketInterface } from '../../shared/serverInterface';
 import { Server } from 'socket.io';
 
 enum GameState {
@@ -29,6 +29,7 @@ class Game {
   private gameState: GameState;
   private WIDTH = 960;
   private HEIGHT = 720;
+  private inputHandler: InputHandler;
 
   constructor(io: ServerInterface) {
     const screenObject = new RectObject(this.WIDTH, this.HEIGHT);
@@ -38,8 +39,8 @@ class Game {
     };
     this.screen = screenObject.getRect({ topLeft: screenPos });
     this.jsonData = new JsonData();
-    const inputHandler = new InputHandler();
-    this.keys = inputHandler.keys;
+    this.inputHandler = new InputHandler();
+    this.keys = this.inputHandler.keys;
     this.fightBox = new FightBox(this.screen);
     this.player = new Player(this.fightBox.innerBox);
     this.bonesWave = new BoneWave(this.jsonData.bonesData);
@@ -59,12 +60,12 @@ class Game {
   }
 
   loadFrame(frame: number) {
+    this.stopGame();
     this.restart();
-    let currentFrame = 0;
-    while (frame >= currentFrame) {
+    for (let currentFrame = 0; currentFrame <= frame; currentFrame++) {
       this.update();
-      currentFrame += 1;
     }
+    this.startGame();
     this.previous = performance.now();
   }
 
@@ -93,10 +94,14 @@ class Game {
     this.bonesWave.update();
   }
 
+  switchSocket(socket: SocketInterface) {
+    this.inputHandler.switchSocket(socket);
+  }
+
   getState(): State {
-    const playerPos = { x: this.player.rect.x, y: this.player.rect.y };
+    const playerState = this.player.getPlayerState();
     const boneStates = this.bonesWave.getBoneStates();
-    const state = { playerPos, boneStates };
+    const state = { playerState, boneStates };
     return state;
   }
 }

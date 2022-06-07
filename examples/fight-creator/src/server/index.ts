@@ -18,6 +18,7 @@ const game = new Game(io);
 game.startGame();
 
 io.on('connection', (socket) => {
+  game.switchSocket(socket);
   socket.on('startGame', () => {
     game.loadFrame(420);
   });
