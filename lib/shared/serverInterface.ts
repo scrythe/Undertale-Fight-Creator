@@ -1,7 +1,7 @@
 import { Socket as ClientSocket } from 'socket.io-client';
 import { Server, Socket as ServerSocket } from 'socket.io';
 import { State } from './stateInterface';
-import { Keys } from './interface';
+import { Keys, Position } from './interface';
 
 export interface ServerToClientEvents {
   sendState: (state: State) => void;
@@ -10,6 +10,7 @@ export interface ServerToClientEvents {
 export interface ClientToServerEvents {
   startGame: () => void;
   sendKey: (pressedKey: keyof Keys, value: boolean) => void;
+  sendPos: (pos: Position) => void;
 }
 
 export interface InterServerEvents {}

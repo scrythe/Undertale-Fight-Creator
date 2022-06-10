@@ -21,14 +21,14 @@ class Game {
     canvas.height = this.HEIGHT;
     this.ctx = canvas.getContext('2d')!;
 
-    new InputHandler(socket);
-
     const screenObject = new RectObject(this.WIDTH, this.HEIGHT);
     const screenPos = {
       x: 0,
       y: 0,
     };
+
     this.screen = screenObject.getRect({ topLeft: screenPos });
+    new InputHandler(socket, canvas);
     this.fightBox = new FightBox(this.screen);
     this.player = new Player();
     this.bonesWave = new BoneWave();

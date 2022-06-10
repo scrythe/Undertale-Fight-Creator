@@ -1,4 +1,4 @@
-import { KeyMap } from '../shared/interface';
+import { KeyMap, Position } from '../shared/interface';
 import { ClientInterface } from '../shared/serverInterface';
 
 const keyMap: KeyMap = {
@@ -20,7 +20,9 @@ function isOfKeyMap(key: string): key is keyof KeyMap {
 }
 
 class InputHandler {
-  constructor(socket: ClientInterface) {
+  private hoveredPos?: Position;
+
+  constructor(socket: ClientInterface, canvas: HTMLCanvasElement) {
     addEventListener('keydown', ({ key }) => {
       if (!isOfKeyMap(key)) return;
       const pressedKey = keyMap[key];
@@ -31,6 +33,16 @@ class InputHandler {
       if (!isOfKeyMap(key)) return;
       const pressedKey = keyMap[key];
       socket.emit('sendKey', pressedKey, false);
+    });
+
+    const canvasPos = canvas.getBoundingClientRect();
+
+    canvas.addEventListener('mousemove', (e) => {
+      const x = e.x - canvasPos.x;
+      const y = e.y - canvasPos.y;
+      this.hoveredPos;
+      const pos = { x, y };
+      socket.emit('sendPos', pos);
     });
   }
 }

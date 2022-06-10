@@ -22,6 +22,9 @@ io.on('connection', (socket) => {
   socket.on('startGame', () => {
     game.loadFrame(420);
   });
+  socket.on('sendPos', (pos) => {
+    console.log(pos);
+  });
 });
 
 io.listen(3000);
